@@ -1,5 +1,5 @@
 # project vars
-project = "webserver-test"
+project = "test"
 
 # aws vars
 region = "us-east-1"
@@ -7,7 +7,7 @@ region = "us-east-1"
 # vpc vars
 vpc_cidr = "172.16.0.0/16"
 # subnet vars
-azs_count = 1
+azs_count = 2
 newbits   = 8
 
 # security group vars
