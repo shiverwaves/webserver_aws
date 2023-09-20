@@ -61,15 +61,4 @@ module "webserver_ec2" {
   vpc_security_group_ids      = [module.webserver_sg.security_group_id]
   subnet_id                   = module.vpc.public_subnets[0]
   associate_public_ip_address = var.public_ip
-  user_data                   = <<EOF
-#!/bin/bash
-
-sudo dnf update -y
-sudo dnf install httpd -y
-sudo systemctl start httpd
-git clone https://github.com/tmKamal/under-construction-template.git
-mv under-construction-template/* /var/www/html/
-sudo systemctl restart httpd
-EOF
-
 }
