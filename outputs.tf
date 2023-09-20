@@ -8,6 +8,6 @@ output "webserver_public_ip" {
 }
 
 #######################################################################
-#echo "$(terraform output -raw webserver_key_pair)" >> webserver_key.pem
+#echo "$(terraform output -raw webserver_key_pair)" > webserver_key.pem
 #sudo chmod 600 webserver_key.pem  
 #ssh -i webserver_key.pem ec2-user@"$(terraform output -raw webserver_public_ip)"
