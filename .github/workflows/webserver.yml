@@ -42,7 +42,7 @@ jobs:
         id: validate
         run: terraform validate
 
-      - name: Terraform plan
+      - name: Terraform plan -var-file webserver.tfvars 
         id: plan
         if: github.event_name == 'pull_request'
         run: terraform plan -no-color -input=false
@@ -82,4 +82,4 @@ jobs:
 
       - name: Terraform Apply
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-        run: terraform apply -auto-approve -input=false
+        run: terraform apply -var-file webserver.tfvars -auto-approve -input=false
