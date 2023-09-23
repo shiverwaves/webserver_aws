@@ -5,7 +5,7 @@ provider "aws" {
 data "aws_availability_zones" "available" {}
 
 locals {
-  # https://aws.amazon.com/about-aws/global-infrastructure/regions_az/
+  # https://aws.amazon.com/about-aws/global-infrastructure/regions_az/ 
   azs = slice(data.aws_availability_zones.available.names, 0, var.azs_count)
 
 }
