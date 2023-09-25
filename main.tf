@@ -1,16 +1,16 @@
 terraform {
   required_version = ">= 1.0.0"
   backend "s3" {
-    bucket         = "tf-rm-st-bkt-10d38d7"
+    bucket         = "tf-rm-st-bkt-6e37133"
     key            = "terraform.tfstate"
-    region         = var.region
-    dynamodb_table = "tf-rm-st-tbl-10d38d7"
+    region         = "us-east-1"
+    dynamodb_table = "tf-rm-st-tbl-6e37133"
     encrypt        = true
   }
 }
 
 provider "aws" {
-  region = var.region
+  region = "us-east-1"
 }
 
 data "aws_availability_zones" "available" {}
