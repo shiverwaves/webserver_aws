@@ -2,6 +2,7 @@
 
 # create s3 bucket with a random hash at the end of the name
 printf "\n############ CREATING S3 BUCKET ############\n"
+# get aws default region configured
 REGION=`aws configure list --output text | grep "region" | awk '{print $2}'`
 sleep 1
 
