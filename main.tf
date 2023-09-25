@@ -1,10 +1,10 @@
 terraform {
   required_version = ">= 1.0.0"
   backend "s3" {
-    bucket         = tf-rm-st-bkt
+    bucket         = tf-rm-st-bkt-7506887
     key            = "terraform.tfstate"
     #region         = var.region
-    dynamodb_table = tf-rm-st-tbl
+    dynamodb_table = tf-rm-st-tbl-7506887
     encrypt        = true
   }
 }
