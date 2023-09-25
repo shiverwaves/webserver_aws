@@ -1,20 +1,6 @@
 # project vars
 variable "project" {}
 
-# aws vars
-variable "AWS_REGION" {
-    type = string
-    description = "TF_VAR_AWS_REGION environment variable set from tf_rm_st_create.sh"
-}
-variable "AWS_BUCKET_NAME" {
-    type = string
-    description = "TF_VAR_AWS_BUCKET_NAME environment variable set from tf_rm_st_create.sh"
-}
-variable "AWS_TABLE_NAME" {
-    type = string
-    description = "TF_VAR_AWS_TABLE_NAME environment variable set from tf_rm_st_create.sh"
-}
-
 # vpc vars
 variable "vpc_cidr" {}
 # subnet vars

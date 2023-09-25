@@ -1,9 +1,6 @@
 # project vars
 project = "test"
 
-# aws vars
-region = "us-east-1"
-
 # vpc vars
 vpc_cidr = "172.16.0.0/16"
 # subnet vars

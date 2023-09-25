@@ -2,10 +2,13 @@
 
 # create s3 bucket with a random hash at the end of the name
 printf "\n############ CREATING S3 BUCKET ############\n"
-aws s3api create-bucket --bucket "tf-rm-st-bkt-`echo $RANDOM | md5sum | head -c 7`"
+REGION=`aws configure list --output text | grep "region" | awk '{print $2}'`
 sleep 1
 
-BUCKET_NAME=`aws s3api list-buckets | grep '"Name"' | awk -F '"' '{print $4}'`
+aws s3api create-bucket --bucket "tf-rm-st-bkt-`echo $RANDOM | md5sum | head -c 7`" --region $REGION
+sleep 1
+
+BUCKET_NAME=`aws s3api list-buckets --output text | grep "BUCKETS" | head -n 1 | awk '{print $3}'`
 sleep 1
 
 aws s3api put-bucket-versioning --bucket $BUCKET_NAME --versioning-configuration Status=Enabled
@@ -24,12 +27,12 @@ sleep 1
 
 # print out bucket and table information
 printf "\n############ UPDATING TF FILES ############\n"
-#echo "TF_VAR_AWS_REGION=$REGION"
-#sed -i "s/region = ".*"/$REGION/g" main.tf
+echo "AWS_REGION=$REGION"
+sed -i "s/\"[a-z][a-z]-[a-z].*-[0-9]\"/\"$REGION\"/g" main.tf
 echo "AWS_BUCKET_NAME=$BUCKET_NAME"
-sed -i "s/tf-rm-st-bkt.*$/$BUCKET_NAME/g" main.tf
+sed -i "s/\"tf-rm-st-bkt.*\"/\"$BUCKET_NAME\"/g" main.tf 
 echo "AWS_TABLE_NAME=$TABLE_NAME"
-sed -i "s/tf-rm-st-tbl.*$/$TABLE_NAME/g" main.tf
+sed -i "s/\"tf-rm-st-tbl.*\"/\"$TABLE_NAME\"/g" main.tf  
 sleep 1
 
 # updating repo files with updated remote state
