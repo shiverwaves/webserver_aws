@@ -1,10 +1,24 @@
+terraform {
+  required_version = ">= 1.0.0"
+  backend "s3" {
+    bucket         = local.bucket_name
+    key            = "terraform.tfstate"
+    region         = local.region
+    dynamodb_table = local.table_name
+    encrypt        = true
+  }
+}
+
 provider "aws" {
-  region = var.region
+  region = local.region
 }
 
 data "aws_availability_zones" "available" {}
 
 locals {
+  region = 
+  bucket_name = tf-rm-st-bkt-32b3c93
+  table_name = tf-rm-st-tbl-32b3c93
   # https://aws.amazon.com/about-aws/global-infrastructure/regions_az/ 
   azs = slice(data.aws_availability_zones.available.names, 0, var.azs_count)
 
