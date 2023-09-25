@@ -23,7 +23,17 @@ TABLE_NAME=`aws dynamodb list-tables | awk '/TableNames/{getline; print}' | awk 
 sleep 1
 
 # print out bucket and table information
-printf "\n############ GENERATING OUTPUT ############\n"
-echo "AWS_REGION: $REGION"
-echo "AWS S3 BUCKET NAME: $BUCKET_NAME"
-echo "AWS DYNAMODB TABLE NAME: $TABLE_NAME"
+printf "\n############ UPDATING TF FILES ############\n"
+#echo "TF_VAR_AWS_REGION=$REGION"
+#sed -i "s/region = ".*"/$REGION/g" main.tf
+echo "AWS_BUCKET_NAME=$BUCKET_NAME"
+sed -i "s/tf-rm-st-bkt.*$/$BUCKET_NAME/g" main.tf
+echo "AWS_TABLE_NAME=$TABLE_NAME"
+sed -i "s/tf-rm-st-tbl.*$/$TABLE_NAME/g" main.tf
+sleep 1
+
+# updating repo files with updated remote state
+printf "\n############ UPDATING GITHUB ############\n"
+git add main.tf
+git commit -m "updating terraform remote_state"
+git push

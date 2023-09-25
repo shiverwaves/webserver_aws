@@ -1,24 +1,21 @@
 terraform {
   required_version = ">= 1.0.0"
   backend "s3" {
-    bucket         = tf-rm-st-bkt-8383443
+    bucket         = tf-rm-st-bkt
     key            = "terraform.tfstate"
-    #region         = local.region
-    dynamodb_table = tf-rm-st-tbl-8383443
+    #region         = var.region
+    dynamodb_table = tf-rm-st-tbl
     encrypt        = true
   }
 }
 
 provider "aws" {
-  #region = local.region
+  #region = var.region
 }
 
 data "aws_availability_zones" "available" {}
 
 locals {
-  #region = 
-  bucket_name = tf-rm-st-bkt-8383443
-  table_name = tf-rm-st-tbl-8383443
   # https://aws.amazon.com/about-aws/global-infrastructure/regions_az/ 
   azs = slice(data.aws_availability_zones.available.names, 0, var.azs_count)
 
