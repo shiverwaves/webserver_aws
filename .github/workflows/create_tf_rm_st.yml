@@ -2,7 +2,12 @@ name: create terraform remote state
 
 on:
   workflow_dispatch:
-
+    inputs:
+      logLevel:
+      description: 'Log level'     
+      required: true
+      default: 'warning'
+      
 env:
   AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
   AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
